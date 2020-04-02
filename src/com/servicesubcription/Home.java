@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.SystemColor;
 import java.awt.Color;
+import java.awt.Font;
 
 public class Home extends JFrame {
 
@@ -177,9 +178,10 @@ public class Home extends JFrame {
 		lblcustError.setBounds(124, 161, 229, 14);
 		panel_1.add(lblcustError);
 		
-		JLabel lblLogin = new JLabel("Home");
+		JLabel lblLogin = new JLabel("Subscription Management System");
+		lblLogin.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblLogin.setForeground(SystemColor.inactiveCaptionBorder);
-		lblLogin.setBounds(198, 5, 71, 14);
+		lblLogin.setBounds(123, 0, 235, 14);
 		panel.add(lblLogin);
 		
 		JButton btnNewButton = new JButton("Admin");
@@ -233,24 +235,24 @@ public class Home extends JFrame {
 		panel_4.add(lblUsername_1);
 		
 		textField_3 = new JTextField();
-		textField_3.setBounds(91, 30, 96, 20);
+		textField_3.setBounds(111, 30, 96, 20);
 		panel_4.add(textField_3);
 		textField_3.setColumns(10);
 		textField_3.setEditable(false);
 		
 		JLabel lblNewUsername = new JLabel("New UserName");
 		lblNewUsername.setForeground(SystemColor.inactiveCaptionBorder);
-		lblNewUsername.setBounds(10, 58, 86, 14);
+		lblNewUsername.setBounds(10, 58, 96, 14);
 		panel_4.add(lblNewUsername);
 		
 		textField_4 = new JTextField();
-		textField_4.setBounds(91, 55, 96, 20);
+		textField_4.setBounds(111, 55, 96, 20);
 		panel_4.add(textField_4);
 		textField_4.setColumns(10);
 		
 		JButton btnUpdate = new JButton("Update");
 		
-		btnUpdate.setBounds(91, 83, 96, 23);
+		btnUpdate.setBounds(111, 83, 96, 23);
 		panel_4.add(btnUpdate);
 		
 		JLabel lblEditUserError = new JLabel("");
@@ -271,28 +273,28 @@ public class Home extends JFrame {
 		
 		JLabel lblUsername_2 = new JLabel("UserName");
 		lblUsername_2.setForeground(SystemColor.inactiveCaptionBorder);
-		lblUsername_2.setBounds(10, 30, 73, 14);
+		lblUsername_2.setBounds(10, 33, 73, 14);
 		panel_5.add(lblUsername_2);
 		
 		textField_5 = new JTextField();
-		textField_5.setBounds(93, 27, 96, 20);
+		textField_5.setBounds(93, 30, 96, 20);
 		panel_5.add(textField_5);
 		textField_5.setColumns(10);
 		textField_5.setEditable(false);
 		
 		textField_6 = new JTextField();
-		textField_6.setBounds(93, 52, 96, 20);
+		textField_6.setBounds(93, 55, 96, 20);
 		panel_5.add(textField_6);
 		textField_6.setColumns(10);
 		
-		JLabel lblSubsciption = new JLabel("Subsciption");
+		JLabel lblSubsciption = new JLabel("Subscription");
 		lblSubsciption.setForeground(SystemColor.inactiveCaptionBorder);
-		lblSubsciption.setBounds(10, 55, 73, 14);
+		lblSubsciption.setBounds(10, 58, 73, 14);
 		panel_5.add(lblSubsciption);
 		
 		JButton btnDelete_1 = new JButton("Delete");
 		
-		btnDelete_1.setBounds(93, 83, 89, 23);
+		btnDelete_1.setBounds(93, 83, 96, 23);
 		panel_5.add(btnDelete_1);
 		
 		JLabel lblEditCustError = new JLabel("");
@@ -343,8 +345,7 @@ public class Home extends JFrame {
 				layeredPane.revalidate();
 				lblAdminError.setText("");
 				textField_2.setText("");
-				table.setModel(tmap.resetTable());
-				
+				table.setModel(tmap.resetTable());		
 			}
 		});
 		
@@ -369,6 +370,7 @@ public class Home extends JFrame {
 				
 			}
 		});		
+		
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblcustError.setText("");
@@ -450,8 +452,7 @@ public class Home extends JFrame {
 						textField_2.setText("");
 					}
 				}
-				
-				
+
 			}
 		});
 	}

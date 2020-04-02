@@ -22,7 +22,25 @@ public class TreeMapStorage {
 	public TreeMapStorage()  {
 		getFileData();
 	}
-	
+	public boolean addDetails(String name,String sub){
+		
+		boolean isInserted = false;
+		LinkedHashSet<String> val = tmap.get(name);
+		if(val == null) {
+			val = new LinkedHashSet<String>();
+			isInserted = val.add(sub);
+			tmap.put(name, val);
+		} else {
+			isInserted = val.add(sub);
+			tmap.put(name, val);
+		}
+		putFileData();
+//		for(Map.Entry m : tmap.entrySet()) {
+//			
+//			System.out.println("Key: "+m.getKey()+" Value "+m.getValue());
+//		}
+		return isInserted;
+	}
 	@SuppressWarnings("unchecked")
 	public void getFileData() {
 		
@@ -52,25 +70,7 @@ public class TreeMapStorage {
 	         i.printStackTrace();
 	      }
 	}
-	public boolean addDetails(String name,String sub){
-		
-		boolean isInserted = false;
-		LinkedHashSet<String> val = tmap.get(name);
-		if(val == null) {
-			val = new LinkedHashSet<String>();
-			isInserted = val.add(sub);
-			tmap.put(name, val);
-		} else {
-			isInserted = val.add(sub);
-			tmap.put(name, val);
-		}
-		putFileData();
-//		for(Map.Entry m : tmap.entrySet()) {
-//			
-//			System.out.println("Key: "+m.getKey()+" Value "+m.getValue());
-//		}
-		return isInserted;
-	}
+	
 	public LinkedHashSet<String> deleteDetails(String name) {  
 		LinkedHashSet<String> data = tmap.remove(name);
 		putFileData();
