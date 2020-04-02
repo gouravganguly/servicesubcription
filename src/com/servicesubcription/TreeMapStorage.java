@@ -1,19 +1,58 @@
 package com.servicesubcription;
 
-import java.util.HashMap;
+import java.io.FileInputStream;
+
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.LinkedHashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
+import java.util.Properties;
 
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 public class TreeMapStorage {
 	
-	public static TreeMap<String, LinkedHashSet<String>> tmap = new TreeMap<String, LinkedHashSet<String>>();
+	public static TreeMap<String, LinkedHashSet<String>> tmap = new TreeMap<String, LinkedHashSet<String>>();;
+	Properties properties = new Properties();
 	
-	public boolean addDetails(String name,String sub) {
+	public TreeMapStorage()  {
+		getFileData();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public void getFileData() {
+		
+		try {
+	         FileInputStream fileIn = new FileInputStream("employee.ser");
+	         ObjectInputStream in = new ObjectInputStream(fileIn);
+	         tmap = (TreeMap<String, LinkedHashSet<String>>) in.readObject();
+	         in.close();
+	         fileIn.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	         return;
+	      } catch (ClassNotFoundException c) {
+	         System.out.println("Employee class not found");
+	         c.printStackTrace();
+	         return;
+	      }
+	}
+	public void putFileData() {
+		try {
+	         FileOutputStream fileOut = new FileOutputStream("employee.ser");
+	         ObjectOutputStream out = new ObjectOutputStream(fileOut);
+	         out.writeObject(tmap);
+	         out.close();
+	         fileOut.close();
+	      } catch (IOException i) {
+	         i.printStackTrace();
+	      }
+	}
+	public boolean addDetails(String name,String sub){
 		
 		boolean isInserted = false;
 		LinkedHashSet<String> val = tmap.get(name);
@@ -25,22 +64,29 @@ public class TreeMapStorage {
 			isInserted = val.add(sub);
 			tmap.put(name, val);
 		}
-		for(Map.Entry m : tmap.entrySet()) {
-			System.out.println("Key: "+m.getKey()+" Value "+m.getValue());
-		}
+		putFileData();
+//		for(Map.Entry m : tmap.entrySet()) {
+//			
+//			System.out.println("Key: "+m.getKey()+" Value "+m.getValue());
+//		}
 		return isInserted;
 	}
-	public LinkedHashSet<String> deleteDetails(String name) {
-		  return tmap.remove(name);
+	public LinkedHashSet<String> deleteDetails(String name) {  
+		LinkedHashSet<String> data = tmap.remove(name);
+		putFileData();
+		return data;
+		  
 	}
 	public void editUserName(String oldName, String newName) {
 		LinkedHashSet<String> list = tmap.remove(oldName);
 		tmap.put(newName, list);
+		putFileData();
 	}
 	public boolean deleteSubscription(String userName, String subName) {
 		LinkedHashSet<String> allsubs = tmap.get(userName);
 		boolean deleted = allsubs.remove(subName);
 		tmap.put(userName, allsubs);
+		putFileData();
 		return deleted;
 	}
 	public boolean checkUser(String userName) {

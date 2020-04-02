@@ -1,26 +1,18 @@
 package com.servicesubcription;
 
-import java.awt.BorderLayout;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.JLayeredPane;
 import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -29,6 +21,10 @@ import java.awt.Color;
 
 public class Home extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JPanel panel = new JPanel();
 	private JTextField textField;
@@ -128,7 +124,7 @@ public class Home extends JFrame {
 		
 		JLabel lblAdminError = new JLabel("");
 		lblAdminError.setForeground(Color.RED);
-		lblAdminError.setBounds(108, 147, 193, 14);
+		lblAdminError.setBounds(137, 147, 186, 14);
 		panel_2.add(lblAdminError);
 		
 		JPanel panel_1 = new JPanel();
@@ -259,7 +255,7 @@ public class Home extends JFrame {
 		
 		JLabel lblEditUserError = new JLabel("");
 		lblEditUserError.setForeground(Color.RED);
-		lblEditUserError.setBounds(30, 123, 177, 14);
+		lblEditUserError.setBounds(10, 123, 197, 14);
 		panel_4.add(lblEditUserError);
 		
 		JPanel panel_5 = new JPanel();
@@ -405,7 +401,7 @@ public class Home extends JFrame {
 					textField_5.setText("");
 					textField_6.setText("");
 				} else {
-					lblEditCustError.setText("Sub not present");
+					lblEditCustError.setText("Subscription not present");
 				}
 			}
 		});
@@ -428,14 +424,12 @@ public class Home extends JFrame {
 		
 		btnSearch_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				lblAdminError.setText("");
 				if(textField_2.getText().isEmpty()) {
 					lblAdminError.setText("UserName cannot be Empty");
-				} 
-				if(tmap.checkUser(textField_2.getText())) {
+				} else if(tmap.checkUser(textField_2.getText())) {
 					table.setModel(tmap.searchData(textField_2.getText()));
 					textField_2.setText("");
-					lblAdminError.setText("");
 				} else 
 					lblAdminError.setText("UserName not present");
 				
@@ -444,6 +438,7 @@ public class Home extends JFrame {
 		
 		btnDelete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				lblAdminError.setText("");
 				if(textField_2.getText().isEmpty()) {
 					lblAdminError.setText("UserName cannot be Empty");
 				} else {
@@ -452,7 +447,7 @@ public class Home extends JFrame {
 						lblAdminError.setText("UserName not present");
 					} else {
 						table.setModel(tmap.getData());
-						lblAdminError.setText("");
+						textField_2.setText("");
 					}
 				}
 				
